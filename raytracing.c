@@ -98,13 +98,21 @@ int main(int argc, char *argv[]){
                 running = 0;
             }
 
-            if (event.type == SDL_MOUSEMOTION && event.motion.state != 0){
-                circle.x = event.motion.x;
-                circle.y = event.motion.y;
+            if (event.type == SDL_MOUSEMOTION){
+
+                if (event.motion.state & SDL_BUTTON_LMASK) {
+                    circle.x = event.motion.x;
+                    circle.y = event.motion.y;
                     
-                for (int i = 0; i < RAYS; i++){
-                    rays[i].x = circle.x;
-                    rays[i].y = circle.y;
+                    for (int i = 0; i < RAYS; i++){
+                        rays[i].x = circle.x;
+                        rays[i].y = circle.y;
+                    }
+                }
+
+                if (event.motion.state & SDL_BUTTON_RMASK) {
+                    CircleShadow.x = event.motion.x;
+                    CircleShadow.y = event.motion.y;
                 }
             }
         }
